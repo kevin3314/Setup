@@ -1,3 +1,5 @@
+#!/bin/bash
+
 DOTFILES=$(pwd)
 now=$(date '+%Y%m%d%H%M%S')
 
