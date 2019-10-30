@@ -11,3 +11,4 @@ function copy_file() {
 }
 
 copy_file '.zshrc'
+copy_file '.gitconfig'
