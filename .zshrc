@@ -128,3 +128,4 @@ export PATH="/usr/local/opt/sqlite/bin:$PATH"
 
 pyenv activate forVim
 alias vi="nvim"
+alias py="python"
