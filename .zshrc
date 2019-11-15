@@ -130,6 +130,6 @@ pyenv activate forVim
 alias vi="nvim"
 alias py="python"
 
-if [ "$(uname)" == 'Darwin' ]; then
+if [ "$(uname)" = 'Darwin' ]; then
   alias ctags="`brew --prefix`/bin/ctags"
 fi
