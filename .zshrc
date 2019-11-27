@@ -133,3 +133,11 @@ alias py="python"
 if [ "$(uname)" = 'Darwin' ]; then
   alias ctags="`brew --prefix`/bin/ctags"
 fi
+
+# thanks to https://qiita.com/bam6o0/items/354faa9394755a984661
+kaggle_python(){
+  docker run -v $PWD:/tmp/working -w=/tmp/working --rm -it kaggle/python python "$@"
+}
+kaggle_jupyter() {
+  docker run -v $PWD:/tmp/working -w=/tmp/working -p 8888:8888 --rm -it kaggle/python jupyter notebook --no-browser --ip="0.0.0.0" --notebook-dir=/tmp/working --allow-root
+}
