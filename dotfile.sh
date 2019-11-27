@@ -14,3 +14,4 @@ function copy_file() {
 
 copy_file '.zshrc'
 copy_file '.gitconfig'
+copy_file '.tmux.conf'
