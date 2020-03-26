@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #---------------- ~/.config/nvim setup ----------------
 
 git clone https://github.com/kevin3314/NeoVimConfig
@@ -17,11 +19,6 @@ fi
 if [ -d ~/.config/NeoVimConfig ]; then
   rm -r -f ~/.config/NeoVimConfig
 fi
-
-# git config
-git config --global user.name "Akutagawa"
-git config --global user.email pbwfh384@gmail.com
-git config --global core.editor nvim
 
 #(for Mac)
 #---------------- pyenv setup ----------------
@@ -58,8 +55,6 @@ if [ "$(uname)" == 'Darwin' ]; then
   chmod 775 ./dotfile.sh
   ./dotfile.sh
 
-  cp Ricty Regular Nerd Font Plus Font Awesome Plus Octicons Plus Pomicons Plus Font Logos (Font Linux).ttf ~/Library/Fonts/
-
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   # When OS is Linux.
   git clone https://github.com/pyenv/pyenv.git ~/.pyenv
@@ -87,6 +82,9 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   pip install 'flake8'
   pip install 'pynvim'
   pip install 'jedi'
+
+  chmod 775 ./dotfile.sh
+  ./dotfile.sh
 
 fi
 
