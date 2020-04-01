@@ -20,11 +20,6 @@ if [ -d ~/.config/NeoVimConfig ]; then
   rm -r -f ~/.config/NeoVimConfig
 fi
 
-# git config
-git config --global user.name "Akutagawa"
-git config --global user.email pbwfh384@gmail.com
-git config --global core.editor nvim
-
 #(for Mac)
 #---------------- pyenv setup ----------------
 if [ "$(uname)" == 'Darwin' ]; then
@@ -87,6 +82,9 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   pip install 'flake8'
   pip install 'pynvim'
   pip install 'jedi'
+
+  chmod 775 ./dotfile.sh
+  ./dotfile.sh
 
 fi
 
