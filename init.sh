@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #---------------- ~/.config/nvim setup ----------------
 
 git clone https://github.com/kevin3314/NeoVimConfig
@@ -57,8 +59,6 @@ if [ "$(uname)" == 'Darwin' ]; then
 
   chmod 775 ./dotfile.sh
   ./dotfile.sh
-
-  cp Ricty Regular Nerd Font Plus Font Awesome Plus Octicons Plus Pomicons Plus Font Logos (Font Linux).ttf ~/Library/Fonts/
 
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   # When OS is Linux.

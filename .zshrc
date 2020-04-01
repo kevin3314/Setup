@@ -108,7 +108,6 @@ eval "$(pyenv virtualenv-init -)"
 
 alias drun=\
 "docker run -it --rm \
---runtime=nvidia \
 -p 8888:8888 \
 $@"
 
