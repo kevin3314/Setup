@@ -108,7 +108,6 @@ eval "$(pyenv virtualenv-init -)"
 
 alias drun=\
 "docker run -it --rm \
---runtime=nvidia \
 -p 8888:8888 \
 $@"
 
@@ -132,6 +131,13 @@ alias py="python"
 
 if [ "$(uname)" = 'Darwin' ]; then
   alias ctags="`brew --prefix`/bin/ctags"
+fi
+
+# Add ssh key if not added yet.
+if [ -S "$SSH_AUTH_SOCK" ]; then
+  if ! ssh-add -l > /dev/null; then
+    ssh-add "$HOME/.ssh/id_rsa"
+  fi
 fi
 
 # thanks to https://qiita.com/bam6o0/items/354faa9394755a984661
