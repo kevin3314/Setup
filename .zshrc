@@ -108,7 +108,13 @@ eval "$(pyenv virtualenv-init -)"
 
 alias drun=\
 "docker run -it --rm \
+--user $(id -u):$(id -g) \
 -p 8888:8888 \
+-v /etc/group:/etc/group:ro \
+-v /etc/passwd:/etc/passwd:ro \
+-v /etc/shadow:/etc/shadow:ro \
+-v /etc/sudoers.d:/etc/sudoers.d:ro \
+-v /data_server_storage2/docker/setting/home:/home \
 $@"
 
 autoload -Uz compinit && compinit
@@ -142,14 +148,17 @@ fi
 
 # thanks to https://qiita.com/bam6o0/items/354faa9394755a984661
 gpu_run_jupyter() {
-  docker run -v $PWD:/working/contents/program -v ~/.jupyter:/root/.jupyter -w=/tmp/working -p 8888:8888 --rm -it --gpus all -e NVIDIA_VISIBLE_DEVICES=all skyskynow1919/basic:latest jupyter notebook --no-browser --ip="0.0.0.0" --notebook-dir=/working/contents/program --allow-root
+  drun -v $PWD:/working/contents/program -v ~/.jupyter:/root/.jupyter -w=/tmp/working --rm -it --gpus all -e NVIDIA_VISIBLE_DEVICES=all skyskynow1919/basic:latest jupyter notebook --no-browser --ip="0.0.0.0" --notebook-dir=/working/contents/program --allow-root
 }
+
 gpu_run() {
-  docker run -v $PWD:/working/contents/program -v ~/.jupyter:/root/.jupyter -w=/working/contents/program -p 8888:8888 --rm -it --gpus all -e NVIDIA_VISIBLE_DEVICES=all skyskynow1919/basic:latest /bin/bash
+  drun -v $PWD:/working/contents/program -v ~/.jupyter:/root/.jupyter -w=/working/contents/program --rm -it --gpus all -e NVIDIA_VISIBLE_DEVICES=all skyskynow1919/basic:latest /bin/bash
 }
+
 kaggle_jupyter() {
-  docker run -v $PWD:/tmp/working -w=/tmp/working -v ~/.jupyter:/root/.jupyter -p 8888:8888 --gpus all -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_CAPABILITIES=compute,utility  -e LD_LIBRARY_PATH=/usr/local/cuda/lib64 --rm -it skyskynow1919/kaggle-gpu jupyter notebook --no-browser --ip="0.0.0.0" --notebook-dir=/tmp/working --allow-root
+  drun -v $PWD:/tmp/working -w=/tmp/working -v ~/.jupyter:/root/.jupyter --gpus all -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_CAPABILITIES=compute,utility  -e LD_LIBRARY_PATH=/usr/local/cuda/lib64 --rm -it skyskynow1919/kaggle-gpu jupyter notebook --no-browser --ip="0.0.0.0" --notebook-dir=/tmp/working --allow-root
 }
+
 kaggle_run() {
-  docker run -v $PWD:/tmp/working -w=/tmp/working -v ~/.jupyter:/root/.jupyter -p 8888:8888 --gpus all -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_CAPABILITIES=compute,utility -e LD_LIBRARY_PATH=/usr/local/cuda/lib64 --rm -it skyskynow1919/kaggle-gpu /bin/bash
+  drun -v $PWD:/tmp/working -w=/tmp/working -v ~/.jupyter:/root/.jupyter --gpus all -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_CAPABILITIES=compute,utility -e LD_LIBRARY_PATH=/usr/local/cuda/lib64 --rm -it skyskynow1919/kaggle-gpu /bin/bash
 }
