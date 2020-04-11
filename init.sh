@@ -56,6 +56,11 @@ if [ "$(uname)" == 'Darwin' ]; then
   ./dotfile.sh
 
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+  # setup zsh
+  chsh -s /usr/local/bin/zsh
+  # install oh-my-zsh
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
   # When OS is Linux.
   git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 
