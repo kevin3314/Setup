@@ -51,6 +51,7 @@ if [ "$(uname)" == 'Darwin' ]; then
   pip install 'flake8'
   pip install 'pynvim'
   pip install 'jedi'
+  pip install 'yapf'
 
   chmod 775 ./dotfile.sh
   ./dotfile.sh
@@ -87,6 +88,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   pip install 'flake8'
   pip install 'pynvim'
   pip install 'jedi'
+  pip install 'yapf'
 
   chmod 775 ./dotfile.sh
   ./dotfile.sh
