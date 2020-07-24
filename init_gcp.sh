@@ -22,3 +22,11 @@ cd Setup
 chmod 775 dotfile.sh
 ./dotfile.sh
 cd ..
+
+pip install 'autopep8'
+pip install 'black'
+pip install 'isort'
+pip install 'flake8'
+pip install 'pynvim'
+pip install 'jedi'
+pip install 'yapf'
