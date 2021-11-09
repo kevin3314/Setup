@@ -98,25 +98,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias vi="nvim"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-eval "$(pyenv virtualenv-init -)"
-
-alias drun=\
-"docker run -it --rm \
---user $(id -u):$(id -g) \
--p 8888:8888 \
--v /etc/group:/etc/group:ro \
--v /etc/passwd:/etc/passwd:ro \
--v /etc/shadow:/etc/shadow:ro \
--v /etc/sudoers.d:/etc/sudoers.d:ro \
--v /data_server_storage2/docker/setting/home:/home \
-$@"
-
 autoload -Uz compinit && compinit
 
 setopt auto_list
@@ -131,7 +112,6 @@ export PATH="/usr/local/opt/gettext/bin:$PATH"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 
-pyenv activate forVim
 alias vi="nvim"
 alias py="python"
 
@@ -145,23 +125,6 @@ if [ -S "$SSH_AUTH_SOCK" ]; then
     ssh-add "$HOME/.ssh/id_rsa"
   fi
 fi
-
-# thanks to https://qiita.com/bam6o0/items/354faa9394755a984661
-gpu_run_jupyter() {
-  drun -v $PWD:/working/contents/program -v ~/.jupyter:/root/.jupyter -w=/tmp/working --rm -it --gpus all -e NVIDIA_VISIBLE_DEVICES=all skyskynow1919/basic:latest jupyter notebook --no-browser --ip="0.0.0.0" --notebook-dir=/working/contents/program --allow-root
-}
-
-gpu_run() {
-  drun -v $PWD:/working/contents/program -v ~/.jupyter:/root/.jupyter -w=/working/contents/program --rm -it --gpus all -e NVIDIA_VISIBLE_DEVICES=all skyskynow1919/basic:latest /bin/bash
-}
-
-kaggle_jupyter() {
-  drun -v $PWD:/tmp/working -w=/tmp/working -v ~/.jupyter:/root/.jupyter --gpus all -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_CAPABILITIES=compute,utility  -e LD_LIBRARY_PATH=/usr/local/cuda/lib64 --rm -it skyskynow1919/kaggle-gpu jupyter notebook --no-browser --ip="0.0.0.0" --notebook-dir=/tmp/working --allow-root
-}
-
-kaggle_run() {
-  drun -v $PWD:/tmp/working -w=/tmp/working -v ~/.jupyter:/root/.jupyter --gpus all -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_CAPABILITIES=compute,utility -e LD_LIBRARY_PATH=/usr/local/cuda/lib64 --rm -it skyskynow1919/kaggle-gpu /bin/bash
-}
 
 #------------------------------------------ history  ----------------------------------------
 # ヒストリに追加されるコマンド行が古いものと同じなら古いものを削除
