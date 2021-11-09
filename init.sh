@@ -41,18 +41,6 @@ if [ "$(uname)" == 'Darwin' ]; then
 
   sudo installer -pkg '/Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg' -target /
 
-  pyenv install '3.7.0'
-  pyenv virtualenv '3.7.0' 'forVim'
-  pyenv activate 'forVim'
-
-  pip install 'autopep8'
-  pip install 'black'
-  pip install 'isort'
-  pip install 'flake8'
-  pip install 'pynvim'
-  pip install 'jedi'
-  pip install 'yapf'
-
   chmod 775 ./dotfile.sh
   ./dotfile.sh
 
@@ -66,29 +54,17 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 
   # for pyenv
-  echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
-  echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
-  echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
+  # echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+  # echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+  # echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
 
   source ~/.zshrc
 
   # for virtualenv
   git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
-  echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zshrc
+  # echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zshrc
 
   source ~/.zshrc
-
-  pyenv install '3.7.0'
-  pyenv virtualenv '3.7.0' 'forVim'
-  pyenv activate 'forVim'
-
-  pip install 'autopep8'
-  pip install 'black'
-  pip install 'isort'
-  pip install 'flake8'
-  pip install 'pynvim'
-  pip install 'jedi'
-  pip install 'yapf'
 
   chmod 775 ./dotfile.sh
   ./dotfile.sh
