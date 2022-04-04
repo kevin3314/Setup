@@ -1,48 +1,34 @@
 #!/bin/bash
 
-#---------------- ~/.config/nvim setup ----------------
-
-git clone https://github.com/kevin3314/NeoVimConfig
-
-if [ ! -d ~/.config ]; then
-  mkdir ~/.config
-fi
-
-if [ ! -d ~/.config/NeoVimConfig ]; then
-  mv './NeoVimConfig' ~/.config/
-fi
-
-if [ ! -d ~/.config/nvim ]; then
-  mv ~/.config/NeoVimConfig ~/.config/nvim
-fi
-
-if [ -d ~/.config/NeoVimConfig ]; then
-  rm -r -f ~/.config/NeoVimConfig
-fi
-
 #(for Mac)
 #---------------- pyenv setup ----------------
 if [ "$(uname)" == 'Darwin' ]; then
+  chsh -s /usr/local/bin/zsh
   # When OS is Mac.
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+  git clone --recursive git@github.com:kevin3314/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+  setopt EXTENDED_GLOB
+  for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+	  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+  done
+
   # setup shell
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+
   brew cask install iterm2
-  chsh -s /usr/local/bin/zsh
-
-  # install oh-my-zsh
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
+  brew cask install alfred
   brew install neovim
-
   brew install pyenv
-
-  brew install pyenv-virtualenv
-
-  sudo installer -pkg '/Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg' -target /
 
   chmod 775 ./dotfile.sh
   ./dotfile.sh
+
+  cp Ricty\ Regular\ Nerd\ Font\ Plus\ Font\ Awesome\ Plus\ Octicons\ Plus\ Pomicons\ Plus\ Font\ Logos\ \(Font\ Linux\).ttf ~/Library/Fonts/
+  brew install peco
+  brew install percol
+  git clone git@github.com:kevin3314/anyframe.git ~/anyframe
 
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   # setup zsh

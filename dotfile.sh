@@ -12,6 +12,5 @@ function copy_file() {
   ln -fs $DOTFILES/$1
 }
 
-copy_file '.zshrc'
 copy_file '.gitconfig'
 copy_file '.tmux.conf'
